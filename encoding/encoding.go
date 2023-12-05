@@ -29,23 +29,23 @@ type MyEncoder interface {
 
 // Encoding перекодирует файл из JSON в YAML
 func (j *JSONData) Encoding() error {
-	JSONData, err := os.ReadFile(j.FileInput)
+	jsonData, err := os.ReadFile(j.FileInput)
 	if err != nil {
 		return err
 	}
 
 	var data models.DockerCompose
-	err = json.Unmarshal(JSONData, &data)
+	err = json.Unmarshal(jsonData, &data)
 	if err != nil {
 		return err
 	}
 
-	YAMLData, err := yaml.Marshal(data)
+	yamlData, err := yaml.Marshal(data)
 	if err != nil {
 		return err
 	}
 
-	err = os.WriteFile(j.FileOutput, YAMLData, 0644)
+	err = os.WriteFile(j.FileOutput, yamlData, 0644)
 	if err != nil {
 		return err
 	}
@@ -55,23 +55,23 @@ func (j *JSONData) Encoding() error {
 
 // Encoding перекодирует файл из YAML в JSON
 func (y *YAMLData) Encoding() error {
-	YAMLData, err := os.ReadFile(y.FileInput)
+	yamlData, err := os.ReadFile(y.FileInput)
 	if err != nil {
 		return err
 	}
 
 	var data models.DockerCompose
-	err = yaml.Unmarshal(YAMLData, &data)
+	err = yaml.Unmarshal(yamlData, &data)
 	if err != nil {
 		return err
 	}
 
-	JSONData, err := json.Marshal(data)
+	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
 
-	err = os.WriteFile(y.FileOutput, JSONData, 0644)
+	err = os.WriteFile(y.FileOutput, jsonData, 0644)
 	if err != nil {
 		return err
 	}
